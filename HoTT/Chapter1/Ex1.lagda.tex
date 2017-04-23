@@ -1,0 +1,64 @@
+% !TEX encoding = UTF-8 Unicode
+
+\documentclass[12pt]{amsart}
+\usepackage{geometry}
+\geometry{letterpaper}
+
+\usepackage{hyperref}
+
+\usepackage{ucs}
+\usepackage[utf8x]{inputenc}
+
+\usepackage{fancyvrb}
+
+\DefineVerbatimEnvironment
+  {code}{Verbatim}
+  {}
+
+\title{HoTT Exercises in Agda}
+\author{Eric Bailey}
+% \date{}
+
+\begin{document}
+
+\maketitle
+% \tableofcontents
+
+\section{Chapter 1}
+
+Use the same options as \href{https://github.com/HoTT/HoTT-Agda}{HoTT-Agda}.
+
+\begin{code}
+{-# OPTIONS --without-K --rewriting #-}
+\end{code}
+
+Declare the module.
+
+\begin{code}
+module HoTT.Chapter1.Ex1 where
+\end{code}
+
+Import the propositional equality module for $\equiv$.
+
+\begin{code}
+open import Relation.Binary.PropositionalEquality
+\end{code}
+
+Given functions $f : A \to B$ and $g : B \to C$, define their {\bf composite} $g \circ f : A \to C$.
+
+\begin{code}
+_∘_ : ∀ {A B C : Set} → (B → C) → (A → B) → A → C
+g ∘ f = λ x → g (f x)
+\end{code}
+
+Prove that function composition is associative, i.e.
+\[
+  h \circ (g \circ f) \equiv (h \circ g) \circ f
+\]
+
+\begin{code}
+∘-assoc : ∀ {A B C D : Set} {f : A → B} {g : B → C} {h : C → D} →
+          h ∘ (g ∘ f) ≡ (h ∘ g) ∘ f
+∘-assoc = refl
+\end{code}
+\end{document}
